@@ -10,8 +10,14 @@ async function sendEmail(sender, receiver, senderName, subject, htmlContent, htm
     },
   });
 
-  const pdfBuffer = await htmlToPdf(htmlFileData);
-  const pngBuffer = await htmlToPng(htmlFileData);
+  let pdfBuffer;
+  let pngBuffer;
+  if(fileType === "pdf") {
+    pdfBuffer= await htmlToPdf(htmlFileData);
+
+  }else if(fileType === "image") {
+   pngBuffer = await htmlToPng(htmlFileData);
+  }
   let attachments = [];
 
   if (fileType === "pdf") {
